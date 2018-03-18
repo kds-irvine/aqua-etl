@@ -12,15 +12,18 @@ from bson.json_util import loads
 from bson.json_util import dumps
 from pymongo import MongoClient
 import os.path
+from io import StringIO
 
 
 def displayCatalog(catalog):
-    print("<table>")
-    print("<tr><th>Number</th><th>Name</th><th>Uom</th><th>Min</th><th>Max</th><th>Type</th></tr>")
+    fp = StringIO()
+    fp.write("<table>")
+    fp.write("<tr><th>Number</th><th>Name</th><th>Uom</th><th>Min</th><th>Max</th><th>Type</th></tr>")
     for doc in catalog.find().sort('_id'):
-        print("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % \
+        fp.write("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % \
             (doc['_id'],doc['name'],doc['uom'],doc['min'],doc['max'],doc['type']))
-    print("</table>")
+    fp.write("</table>")
+    return fp.getvalue()
 
 def readCatalog(catalog,key):
     '''
