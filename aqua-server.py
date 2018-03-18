@@ -111,7 +111,7 @@ def data_input(data=None):
     else:
         try:
             loadRawData(catmap,raw,errors,data)
-            return('Loaded data...')
+            return('Loaded data...\n')
         except:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             print('%s %s' % (exc_type,exc_value))
