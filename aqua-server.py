@@ -14,6 +14,13 @@ from pymongo import MongoClient
 import os.path
 
 
+def displayCatalog(catalog):
+    print("<table>")
+    print("<tr><th>Number</th><th>Name</th><th>Uom</th><th>Min</th><th>Max</th><th>Type</th></tr>")
+    for doc in catalog.find().sort('_id'):
+        print("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % \
+            (doc['_id'],doc['name'],doc['uom'],doc['min'],doc['max'],doc['type']))
+    print("</table>")
 
 def readCatalog(catalog,key):
     '''
@@ -92,12 +99,7 @@ cursor = catalog.find()
 for doc in cursor:
     catmap[doc['_id']] = doc
 
-# Sample Data
-#data = "01;20180316113000;0125.0;0220;0323;046.8"
-#loadRawData(catmap,raw,data)
-#sys.exit(0)
-
-
+# Start Server
 app = Flask(__name__)
 
 @app.route('/')
@@ -116,3 +118,7 @@ def data_input(data=None):
             exc_type, exc_value, exc_traceback = sys.exc_info()
             print('%s %s' % (exc_type,exc_value))
             return('Error Loading Data: %s\n' % traceback.print_tb(exc_traceback))
+
+@app.rotue('/catalog')
+def cat():
+    return(displayCatalog(catalog))
