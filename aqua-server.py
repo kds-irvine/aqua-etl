@@ -119,6 +119,6 @@ def data_input(data=None):
             print('%s %s' % (exc_type,exc_value))
             return('Error Loading Data: %s\n' % traceback.print_tb(exc_traceback))
 
-@app.rotue('/catalog')
+@app.route('/catalog')
 def cat():
     return(displayCatalog(catalog))
