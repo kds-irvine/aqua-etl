@@ -1,6 +1,11 @@
 #!/bin/bash
 
-export FLASK_APP=aqua-server.py
+DIR=/usr/local/aqua-etl
+cd ${DIR}
 
-nohup flask run --port=8000 > /tmp/run.log 2>&1 &
+export FLASK_APP=${DIR}/aqua-server.py
+
+source ${DIR}/venv/bin/activate
+
+flask run --port=8000  --host=0.0.0.0
 
