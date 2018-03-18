@@ -1,1 +1,3 @@
-networkx
+pymongo
+configparser
+flask
