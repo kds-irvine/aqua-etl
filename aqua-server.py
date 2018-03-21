@@ -59,17 +59,17 @@ def loadRawData(catmap,raw,errors,data):
         tok.pop(0)
         tok.pop(0)
         for item in tok:
-            if item[:2] in catmap:
-                catitem = catmap[item[:2]]
+            if item[:3] in catmap:
+                catitem = catmap[item[:3]]
                 name = catitem['name']
-                value = item[2:]
+                value = item[3:]
                 # Convert?
                 if (catitem['type'] == 'F'):
                     obj[name] = float(value)
                 else:
                     obj[name] = value
             else:
-                errorLog(errors,data,'Unknown parameter %s' % item[:2])
+                errorLog(errors,data,'Unknown parameter %s' % item[:3])
 
         raw.insert(obj)
         print('Updated db')
