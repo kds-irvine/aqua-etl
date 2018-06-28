@@ -61,7 +61,7 @@ def loadRawData(catmap,raw,errors,data):
         for item in tok:
             if item[:3] in catmap:
                 catitem = catmap[item[:3]]
-                name = catitem['name']
+                name = item[:3] #catitem['name']
                 value = item[3:]
                 # Convert?
                 if (catitem['type'] == 'F'):
